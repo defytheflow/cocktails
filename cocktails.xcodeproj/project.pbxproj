@@ -12,15 +12,17 @@
 		1FB834DA27B6B83600BF9B7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FB834D927B6B83600BF9B7A /* Assets.xcassets */; };
 		1FB834DD27B6B83600BF9B7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FB834DC27B6B83600BF9B7A /* Preview Assets.xcassets */; };
 		1FB834E427B6B91A00BF9B7A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB834E327B6B91A00BF9B7A /* Network.swift */; };
+		D793DB5F27BA92A9000169DC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D793DB5E27BA92A9000169DC /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1FB834D227B6B83500BF9B7A /* cocktails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cocktails.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FB834D227B6B83500BF9B7A /* pocketBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pocketBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FB834D527B6B83500BF9B7A /* cocktailsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cocktailsApp.swift; sourceTree = "<group>"; };
 		1FB834D727B6B83500BF9B7A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1FB834D927B6B83600BF9B7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FB834DC27B6B83600BF9B7A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1FB834E327B6B91A00BF9B7A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		D793DB5E27BA92A9000169DC /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +47,7 @@
 		1FB834D327B6B83500BF9B7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1FB834D227B6B83500BF9B7A /* cocktails.app */,
+				1FB834D227B6B83500BF9B7A /* pocketBar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,6 +60,7 @@
 				1FB834D927B6B83600BF9B7A /* Assets.xcassets */,
 				1FB834DB27B6B83600BF9B7A /* Preview Content */,
 				1FB834E327B6B91A00BF9B7A /* Network.swift */,
+				D793DB5E27BA92A9000169DC /* Launch Screen.storyboard */,
 			);
 			path = cocktails;
 			sourceTree = "<group>";
@@ -73,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1FB834D127B6B83500BF9B7A /* cocktails */ = {
+		1FB834D127B6B83500BF9B7A /* pocketBar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1FB834E027B6B83600BF9B7A /* Build configuration list for PBXNativeTarget "cocktails" */;
+			buildConfigurationList = 1FB834E027B6B83600BF9B7A /* Build configuration list for PBXNativeTarget "pocketBar" */;
 			buildPhases = (
 				1FB834CE27B6B83500BF9B7A /* Sources */,
 				1FB834CF27B6B83500BF9B7A /* Frameworks */,
@@ -85,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = cocktails;
+			name = pocketBar;
 			productName = cocktails;
-			productReference = 1FB834D227B6B83500BF9B7A /* cocktails.app */;
+			productReference = 1FB834D227B6B83500BF9B7A /* pocketBar.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -118,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1FB834D127B6B83500BF9B7A /* cocktails */,
+				1FB834D127B6B83500BF9B7A /* pocketBar */,
 			);
 		};
 /* End PBXProject section */
@@ -128,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D793DB5F27BA92A9000169DC /* Launch Screen.storyboard in Resources */,
 				1FB834DD27B6B83600BF9B7A /* Preview Assets.xcassets in Resources */,
 				1FB834DA27B6B83600BF9B7A /* Assets.xcassets in Resources */,
 			);
@@ -273,12 +277,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"cocktails/Preview Content\"";
-				DEVELOPMENT_TEAM = V5PXB3V27M;
+				DEVELOPMENT_TEAM = 94C4QK5LP6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -286,11 +291,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.defytheflow.cocktails;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danarstar.pocketBar;
+				PRODUCT_NAME = pocketBar;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -302,12 +307,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"cocktails/Preview Content\"";
-				DEVELOPMENT_TEAM = V5PXB3V27M;
+				DEVELOPMENT_TEAM = 94C4QK5LP6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -315,11 +321,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.defytheflow.cocktails;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danarstar.pocketBar;
+				PRODUCT_NAME = pocketBar;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -335,7 +341,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1FB834E027B6B83600BF9B7A /* Build configuration list for PBXNativeTarget "cocktails" */ = {
+		1FB834E027B6B83600BF9B7A /* Build configuration list for PBXNativeTarget "pocketBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1FB834E127B6B83600BF9B7A /* Debug */,

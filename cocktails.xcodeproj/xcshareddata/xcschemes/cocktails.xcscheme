@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1FB834D127B6B83500BF9B7A"
-               BuildableName = "cocktails.app"
-               BlueprintName = "cocktails"
+               BuildableName = "pocketBar.app"
+               BlueprintName = "pocketBar"
                ReferencedContainer = "container:cocktails.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1FB834D127B6B83500BF9B7A"
-            BuildableName = "cocktails.app"
-            BlueprintName = "cocktails"
+            BuildableName = "pocketBar.app"
+            BlueprintName = "pocketBar"
             ReferencedContainer = "container:cocktails.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1FB834D127B6B83500BF9B7A"
-            BuildableName = "cocktails.app"
-            BlueprintName = "cocktails"
+            BuildableName = "pocketBar.app"
+            BlueprintName = "pocketBar"
             ReferencedContainer = "container:cocktails.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -7,46 +7,48 @@
 
 import SwiftUI
 
-let THE_WIDTH = CGFloat(390)
-
 struct ContentView: View {
   @EnvironmentObject var network: Network
-  
+
   var body: some View {
     NavigationView {
+      GeometryReader{meta in
+        let frame = meta.frame(in: .global)
+
       ZStack {
         VStack(spacing: -25) {
+
           if let cocktail = network.cocktail {
             AsyncImage(url: URL(string: cocktail.strDrinkThumb)) { image in
               image.resizable()
             } placeholder: {
               ProgressView()
             }
-            .frame(width: THE_WIDTH, height: 390)
-            
+            .frame(width: frame.size.width, height: frame.size.width)
+
             VStack {
               Heading(children: cocktail.strDrink)
-              
+
               RoundedRectangle(cornerRadius: 100)
                 .frame(width: 350, height: 5)
                 .foregroundColor(Color.ui.primary)
-              
+
               Text(cocktail.strCategory)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.horizontal, 5)
                 .font(.system(size: 22))
-              
+
               Text(cocktail.strAlcoholic)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .padding(.horizontal, 5)
                 .font(.system(size: 22))
-              
+
               Spacer()
-              
+
               VStack {
-                NavigationLink(destination: IngredientsView(cocktail: cocktail)) {
+                  NavigationLink(destination: IngredientsView(cocktail: cocktail, metaWidth: frame.size.width)) {
                   Text("Show ingredients")
                     .foregroundColor(Color.ui.primary)
                 }
@@ -62,13 +64,14 @@ struct ContentView: View {
               .font(.system(size: 25))
               .padding(.bottom, 20)
             }
-            
+
             .background(Color.ui.background)
             .clipShape(RoundedRectangle(cornerRadius: 20.0))
           }
           Spacer()
+
         }
-        
+
         VStack {
           Button(action: {}) {
             Text("+")
@@ -78,12 +81,13 @@ struct ContentView: View {
           .background(Color.ui.primary)
           .clipShape(Circle())
           .font(.system(size: 30))
-          .frame(maxWidth: 325, alignment: .trailing)
-          
+          .frame(maxWidth: (frame.size.width - 55), alignment: .trailing)
+
           Spacer().frame(height: 50)
         }
       }
-      .navigationBarHidden(true)
+      .navigationBarHidden(true).background(Color.ui.background)
+      }
     }
     .onAppear(perform: network.fetchCocktail)
   }
@@ -105,23 +109,32 @@ struct Heading: View {
 
 struct IngredientsView: View {
   var cocktail: Cocktail
-  
+    var metaWidth: CGFloat
+
   var body: some View {
     VStack {
       Heading(children: cocktail.strDrink)
       Text(cocktail.strInstructions)
       ScrollView {
-        ForEach(cocktail.getIngredients()) {
-          AsyncImage(url: URL(string: $0.getImageURL())) { image in
+        ForEach(cocktail.getIngredients()) { i in
+            VStack {
+            HStack {
+          AsyncImage(url: URL(string: i.getImageURL())) { image in
             image.resizable()
           } placeholder: {
             ProgressView()
           }
-          .frame(width: 50, height: 50)
-          Text("\($0.name) - \($0.measure)")
+          .frame(width: 100, height: 100)
+                Spacer()
+                Text("\(i.name) - \(i.measure)").font(.system(size: 22)).padding(15)
+            }.frame(width: metaWidth)
+              RoundedRectangle(cornerRadius: 100)
+                .frame(width: 350, height: 2)
+                .foregroundColor(Color.ui.text)
+            }
         }
-      }
-    }
+      }.background(Color.ui.primary).clipShape(RoundedRectangle(cornerRadius: 20.0))
+    }.background(Color.ui.background)
   }
 }
 

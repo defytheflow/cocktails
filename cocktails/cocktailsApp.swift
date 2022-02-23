@@ -13,6 +13,7 @@ extension Color {
   struct UI {
     let primary = Color("color.primary")
     let background = Color("color.background")
+    let text = Color("color.text")
   }
 }
 

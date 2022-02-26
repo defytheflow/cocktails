@@ -108,13 +108,18 @@ struct Heading: View {
 
 
 struct IngredientsView: View {
+    @State private var offset: CGFloat = 0
+    
   var cocktail: Cocktail
-    var metaWidth: CGFloat
+  var metaWidth: CGFloat
+    
 
   var body: some View {
     VStack {
       Heading(children: cocktail.strDrink)
       Text(cocktail.strInstructions)
+        VStack{
+            Capsule().foregroundColor(Color.white).frame(width: 100, height: 7).padding(.top, 7)
       ScrollView {
         ForEach(cocktail.getIngredients()) { i in
             VStack {
@@ -133,10 +138,25 @@ struct IngredientsView: View {
                 .foregroundColor(Color.ui.text)
             }
         }
-      }.background(Color.ui.primary).clipShape(RoundedRectangle(cornerRadius: 20.0))
+      }
+      }.background(Color.ui.primary).clipShape(RoundedRectangle(cornerRadius: 20.0)).offset(y: offset).gesture(DragGesture().onChanged{
+          value in
+          let startLocation = value.startLocation
+          offset = startLocation.y + value.translation.height
+      })
     }.background(Color.ui.background)
   }
 }
+
+
+//struct DrawerView: View {
+//    var body: some View {
+//        VStack {
+//            Capsule().foregroundColor(Color.white).frame(width: 100, height: 7).padding(.top, 7)
+//
+//        }
+//    }
+//}
 
 
 struct ContentView_Previews: PreviewProvider {

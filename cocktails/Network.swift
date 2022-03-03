@@ -29,7 +29,7 @@ class Network: ObservableObject {
             let decoder = JSONDecoder()
             let cocktailData = try decoder.decode(CocktailData.self, from: data)
             self.cocktail = cocktailData.drinks[0]
-            print("Fetched cocktail", self.cocktail)
+//            print("Fetched cocktail", self.cocktail)
           } catch let error {
             print("Error decoding:", error)
           }

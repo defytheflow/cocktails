@@ -28,7 +28,9 @@ struct ContentView: View {
               }
               .frame(width: frame.size.width, height: frame.size.width)
               
+                
               VStack {
+                  
                 Heading(children: cocktail.strDrink)
                 
                 RoundedRectangle(cornerRadius: 100)
@@ -47,6 +49,8 @@ struct ContentView: View {
                   .padding(.horizontal, 5)
                   .font(.system(size: 22))
                   
+                  
+                  
                 Spacer()
                 
                 VStack {
@@ -54,14 +58,7 @@ struct ContentView: View {
                     Text("Show ingredients")
                       .foregroundColor(Color.ui.primary)
                   }
-                  NavigationLink(destination: FavoritesView(favorites: store.favorites, onDelete: { id in
-                    if let index = store.favorites.firstIndex(of: id) {
-                      store.favorites.remove(at: index)
-                    }
-                  })) {
-                    Text("Favorites")
-                      .foregroundColor(Color.ui.primary)
-                  }
+                  
                   Button(action: network.fetchCocktail) {
                     Text("Next cocktail")
                   }
@@ -73,23 +70,33 @@ struct ContentView: View {
                 }
                 .font(.system(size: 25))
                 .padding(.bottom, 20)
-              }
-              
-              .background(Color.ui.background)
+              }.background(Color.ui.background)
               .clipShape(RoundedRectangle(cornerRadius: 20.0))
-              
-              
+                
+               
+                
+            }
+          }
+            if let cocktail = network.cocktail {
                 Button(action: { store.favorites.append(cocktail.idDrink) }) {
-                  Text(store.favorites.contains(cocktail.idDrink) ? "-" : "+")
+                    Text(store.favorites.contains(cocktail.idDrink) ? "💔" : "❤️")
                 }
-                .padding(25)
-                .foregroundColor(.white)
+                .padding(15)
                 .background(Color.ui.primary)
                 .clipShape(Circle())
                 .font(.system(size: 30))
-                .position(x: frame.size.width - 55, y: -(frame.size.height / 2.1) )
+                .shadow(radius: 1)
+                .position(x: frame.size.width - 55, y: frame.size.height / 2.1 )
+                
+                NavigationLink(destination: FavoritesView(favorites: store.favorites, onDelete: { id in
+                  if let index = store.favorites.firstIndex(of: id) {
+                    store.favorites.remove(at: index)
+                  }
+                })) {
+                    Text("⭐️").font(.system(size: 30)).padding(15)
+                }.background(Color.ui.primary).shadow( radius: 1).clipShape(Circle()).position(x: frame.size.width - 50, y: frame.size.height * 0.05)
             }
-          }
+            
         }
         .navigationBarHidden(true).background(Color.ui.background)
       }

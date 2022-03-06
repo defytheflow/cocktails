@@ -11,7 +11,7 @@ struct ContentView: View {
   @EnvironmentObject var network: Network
   @StateObject private var store = Storage()
   @Environment(\.scenePhase) private var scenePhase
-  
+    
   var body: some View {
     NavigationView {
       GeometryReader{meta in
@@ -46,11 +46,11 @@ struct ContentView: View {
                   .padding()
                   .padding(.horizontal, 5)
                   .font(.system(size: 22))
-                
+                  
                 Spacer()
                 
                 VStack {
-                  NavigationLink(destination: IngredientsView(cocktail: cocktail, metaWidth: frame.size.width)) {
+                    NavigationLink(destination: IngredientView(cocktail: cocktail, metaWidth: frame.size.width, metaHeight: frame.size.height)) {
                     Text("Show ingredients")
                       .foregroundColor(Color.ui.primary)
                   }
@@ -78,9 +78,7 @@ struct ContentView: View {
               .background(Color.ui.background)
               .clipShape(RoundedRectangle(cornerRadius: 20.0))
               
-              Spacer()
               
-              VStack {
                 Button(action: { store.favorites.append(cocktail.idDrink) }) {
                   Text(store.favorites.contains(cocktail.idDrink) ? "-" : "+")
                 }
@@ -89,10 +87,7 @@ struct ContentView: View {
                 .background(Color.ui.primary)
                 .clipShape(Circle())
                 .font(.system(size: 30))
-                .frame(maxWidth: (frame.size.width - 55), alignment: .trailing)
-                
-                Spacer().frame(height: 50)
-              }
+                .position(x: frame.size.width - 55, y: -(frame.size.height / 2.1) )
             }
           }
         }
@@ -153,57 +148,76 @@ struct FavoritesView: View {
   }
 }
 
-struct IngredientsView: View {
-  @State private var offset: CGFloat = 0
-  
+struct IngredientView: View {
+    
+    @State var offset: CGFloat = 0
+    @State var lastOffset: CGFloat = 0
+    @GestureState var gestureOffset: CGFloat = 0
+    
   var cocktail: Cocktail
   var metaWidth: CGFloat
-  
-  
-  var body: some View {
-    VStack {
-      Heading(children: cocktail.strDrink)
-      Text(cocktail.strInstructions)
-      VStack {
-        Capsule().foregroundColor(Color.white).frame(width: 100, height: 7).padding(.top, 7)
-        ScrollView {
-          ForEach(cocktail.getIngredients()) { i in
+  var metaHeight: CGFloat
+    
+    var body: some View {
+        ZStack {
             VStack {
-              HStack {
-                AsyncImage(url: URL(string: i.getImageURL())) { image in
-                  image.resizable()
-                } placeholder: {
-                  ProgressView()
-                }
-                .frame(width: 100, height: 100)
+      Heading(children: cocktail.strDrink)
+                RoundedRectangle(cornerRadius: 100)
+                  .frame(width: 350, height: 5)
+                  .foregroundColor(Color.ui.primary).padding(.bottom, 10)
+                Text(cocktail.strInstructions).font(.system(size: 22)).padding(.horizontal, 7)
+                //Text(offset.description)
+                //Text(lastOffset.description)
+                //Text(gestureOffset.description)
                 Spacer()
-                Text("\(i.name) - \(i.measure)").font(.system(size: 22)).padding(15)
-              }.frame(width: metaWidth)
-              RoundedRectangle(cornerRadius: 100)
-                .frame(width: 350, height: 2)
-                .foregroundColor(Color.ui.text)
             }
-          }
-        }
-      }.background(Color.ui.primary).clipShape(RoundedRectangle(cornerRadius: 20.0)).offset(y: offset).gesture(DragGesture().onChanged{
-        value in
-        let startLocation = value.startLocation
-        offset = startLocation.y + value.translation.height
-      })
-    }.background(Color.ui.background)
-  }
+            VStack {
+                Capsule().foregroundColor(Color.black).frame(width: 100, height: 7).padding(10)
+                ScrollView {
+                    ForEach(cocktail.getIngredients()) { i in
+                      VStack {
+                        HStack {
+                          AsyncImage(url: URL(string: i.getImageURL())) { image in
+                            image.resizable()
+                          } placeholder: {
+                            ProgressView()
+                          }
+                          .frame(width: 75, height: 75).padding(.leading, 15)
+                          Spacer()
+                            Text("\(i.name) - \(i.measure)").font(.system(size: 22)).padding(.trailing, 25)
+                        }
+                        // Looks like its better without it
+                          
+                        //RoundedRectangle(cornerRadius: 100)
+                        //  .frame(width: 300, height: 2)
+                        //  .foregroundColor(Color.ui.text)
+                        //  .padding(.bottom, 10)
+                      }.padding(.top, 20)
+                    }
+                // Height parameter should change with the offset
+                // You should be able to scroll all ingredients indep of height
+                }.frame(width: metaWidth)
+                // Drag starting position needs to be adjusted based on the height of the instructions block
+                // Limit the min height by maxHeight - 200
+                // Going back and returning should leave the drag on the same location
+            }.background(Color.ui.primary).clipShape(RoundedRectangle(cornerRadius: 20.0)).offset(y: metaHeight - 200).offset(y: offset).gesture(DragGesture().updating($gestureOffset, body: {
+                value, out, _ in
+                out = value.translation.height
+            }).onChanged({
+                value in
+                // Ensures smooth drag
+                DispatchQueue.main.async {
+                offset = gestureOffset + lastOffset
+                }
+            }).onEnded({
+                value in
+                lastOffset = offset
+            }))
+        // Removes white space used for the title
+        // Using Heading ensured style consistency
+        }.navigationBarTitle(Text(""), displayMode: .inline)
+    }
 }
-
-
-//struct DrawerView: View {
-//    var body: some View {
-//        VStack {
-//            Capsule().foregroundColor(Color.white).frame(width: 100, height: 7).padding(.top, 7)
-//
-//        }
-//    }
-//}
-
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
